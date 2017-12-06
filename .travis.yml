@@ -1,0 +1,53 @@
+language: ruby
+rvm:
+  - 2.1.5
+services:
+  - memcached
+before_install:
+ - gem update bundler
+ - gem install json -v '1.8.3'
+install:
+  - bundle install --path=vendor/bundle
+script:
+  - RAILS_ENV=test bundle exec rake spek
+branches:
+  only:
+    - master
+    - /^topic-beanstalk.*$/
+
+before_deploy:
+  - set -e
+  - |
+    case "$TRAVIS_BRANCH" in
+      topic-beanstalk)
+        ENV=dev
+        ECR_URL=304075530149.dkr.ecr.ap-northeast-1.amazonaws.com
+        SIMPLE_DATE=$(TZ=Asia/Tokyo date "+%Y-%m%d-%H%M")
+        export AWS_DEFAULT_REGION=ap-northeast-1
+        export AWS_ACCESS_KEY_ID=$NEW_DEV_AWS_ACCESS_KEY
+        export AWS_SECRET_ACCESS_KEY=$NEW_DEV_AWS_SECRET_KEY
+        EB_BUCKET_NAME=elasticbeanstalk-ap-northeast-1-304075530149
+        ;;
+      esac
+      case $TRAVIS_BRANCH in
+        topic-beanstalk)
+          export ELASTIC_BEANSTALK_LABEL=benastalk-tmp-${ENV}-${SIMPLE_DATE}
+          echo "Version label is '$ELASTIC_BEANSTALK_LABEL'"
+          ;;
+      esac
+      
+      case $TRAVIS_BRANCH in
+        topic-beanstalk)
+          pip install -user awscli
+          LOGIN_COMMAND=$( $
+            $HOME/.local/bin/aws ecr get-login \
+            --no-include-email --region ap-northeast-1 \
+          )
+          eval $LOGIN_COMMAND
+          NAMETAG=test/test:${SIMPLE_DATE}
+          ./composer.phar install --no-dev
+          docker build -t $NAMETAG .
+          docker tag $NAMETAG $ECR_URL/$NAMETAG
+          docker push $ECR_URL/$NAMETAG
+          ;;
+      esac
