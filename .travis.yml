@@ -19,7 +19,7 @@ before_deploy:
   - set -e
   - |
     case "$TRAVIS_BRANCH" in
-      topic-beanstalk)
+      master)
         ENV=dev
         ECR_URL=304075530149.dkr.ecr.ap-northeast-1.amazonaws.com
         SIMPLE_DATE=$(TZ=Asia/Tokyo date "+%Y-%m%d-%H%M")
@@ -30,14 +30,14 @@ before_deploy:
         ;;
       esac
       case $TRAVIS_BRANCH in
-        topic-beanstalk)
+        master)
           export ELASTIC_BEANSTALK_LABEL=benastalk-tmp-${ENV}-${SIMPLE_DATE}
           echo "Version label is '$ELASTIC_BEANSTALK_LABEL'"
           ;;
       esac
       
       case $TRAVIS_BRANCH in
-        topic-beanstalk)
+        master)
           pip install -user awscli
           LOGIN_COMMAND=$( $
             $HOME/.local/bin/aws ecr get-login \
