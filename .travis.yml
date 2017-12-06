@@ -6,10 +6,10 @@ services:
 before_install:
  - gem update bundler
  - gem install json -v '1.8.3'
-install:
-  - bundle install --path=vendor/bundle
-script:
-  - RAILS_ENV=test bundle exec rake spek
+#install:
+#  - bundle install --path=vendor/bundle
+#script:
+#  - RAILS_ENV=test bundle exec rake spek
 branches:
   only:
     - master
