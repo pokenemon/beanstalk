@@ -51,3 +51,4 @@ before_deploy:
           docker push $ECR_URL/$NAMETAG
           ;;
       esac
+
