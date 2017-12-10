@@ -14,10 +14,10 @@ rvm:
 
 #install:
 #  - bundle install --path=vendor/bundle
-cache: bundler
-script:
-  - bundle exec rubocop
-  - RACK_ENV=spec bundle exec rake spec
+#cache: bundler
+#script:
+#  - bundle exec rubocop
+#  - RACK_ENV=spec bundle exec rake spec
 
 branches:
   only:
