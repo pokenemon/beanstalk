@@ -1,15 +1,16 @@
 language: ruby
 rvm:
   - 2.1.5
-services:
-  - memcached
+#services:
+#  - memcached
 #before_install:
 # - gem update bundler
 # - gem install json -v '1.8.3'
 #install:
 #  - bundle install --path=vendor/bundle
-#script:
+script:
 #  - RAILS_ENV=test bundle exec rake spek
+   - bundle exec rspec spec
 branches:
   only:
     - master
