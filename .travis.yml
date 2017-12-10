@@ -11,6 +11,14 @@ rvm:
 #script:
 #  - RAILS_ENV=test bundle exec rake spek
 #   - bundle exec rspec spec
+
+install:
+  - bundle install --path=vendor/bundle
+cache: bundler
+script:
+  - bundle exec rubocop
+  - RACK_ENV=spec bundle exec rake spec
+
 branches:
   only:
     - master
