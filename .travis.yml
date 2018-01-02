@@ -1,4 +1,4 @@
-language: perl
+language: ruby
 rvm:
   - 2.3.3
 #services:
