@@ -1,6 +1,6 @@
 language: perl
-#perl:
-#  - 1.9.2
+perl:
+  - 1.9.2
 #services:
 #  - memcached
 #before_install:
@@ -22,7 +22,7 @@ language: perl
 branches:
   only:
     - master
-    - /^topic-beanstalk.*$/
+    - beanstalk.*$/
 
 before_deploy:
   - set -e
