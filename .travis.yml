@@ -8,9 +8,9 @@ before_install:
 # - gem install json -v '1.8.3'
 install:
   - bundle install --path=vendor/bundle
-script:
-  - RAILS_ENV=test bundle exec rake spek
-   - bundle exec rspec spec
+#script:
+#  - RAILS_ENV=test bundle exec rake spek
+#   - bundle exec rspec spec
 
 install:
   - bundle install --path=vendor/bundle
