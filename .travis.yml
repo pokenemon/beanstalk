@@ -1,18 +1,18 @@
 language: perl
 rvm:
-  - 2.1.5
+  - 2.3.3
 #services:
 #  - memcached
-#before_install:
-# - gem update bundler
+script:
+  - echo $TRAVIS_BRANCH
+before_install:
+ - gem update bundler
 # - gem install json -v '1.8.3'
 #install:
 #  - bundle install --path=vendor/bundle
 #script:
 #  - RAILS_ENV=test bundle exec rake spek
 #   - bundle exec rspec spec
-script:
-  - echo $TRAVIS_BRANCH
 #install:
 #  - bundle install --path=vendor/bundle
 #cache: bundler
