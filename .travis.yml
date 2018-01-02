@@ -11,7 +11,8 @@ rvm:
 #script:
 #  - RAILS_ENV=test bundle exec rake spek
 #   - bundle exec rspec spec
-
+script:
+  - echo $TRAVIS_BRANCH
 #install:
 #  - bundle install --path=vendor/bundle
 #cache: bundler
