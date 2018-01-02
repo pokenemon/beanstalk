@@ -48,7 +48,7 @@ before_deploy:
       
       case $TRAVIS_BRANCH in
         master)
-          pip install -user awscli
+          pip install --user awscli
           LOGIN_COMMAND=$( $
             $HOME/.local/bin/aws ecr get-login \
             --no-include-email --region ap-northeast-1 \
